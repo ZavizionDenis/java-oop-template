@@ -9,10 +9,6 @@ public class SimpleAuthorRepository implements AuthorRepository {
 
     @Override
     public boolean save(Author author) {
-        if (author == null || author.getName().isEmpty() || author.getLastName().isEmpty()) {
-            return false;
-        }
-
         if (findByFullName(author.getName(), author.getLastName()) == null) {
             Author[] newAuthors = Arrays.copyOf(authors, authors.length + 1);
             authors = newAuthors;
@@ -25,10 +21,6 @@ public class SimpleAuthorRepository implements AuthorRepository {
 
     @Override
     public Author findByFullName(String name, String lastname) {
-        if (name.isEmpty() || lastname.isEmpty()) {
-            return null;
-        }
-
         for (Author author : authors) {
             if (author.getName().equals(name) && author.getLastName().equals(lastname)) {
                 return author;
@@ -39,10 +31,6 @@ public class SimpleAuthorRepository implements AuthorRepository {
 
     @Override
     public boolean remove(Author author) {
-        if (author == null) {
-            return false;
-        }
-
         if (findByFullName(author.getName(), author.getLastName()) != null) {
             Author[] newAuthors = Arrays.copyOf(authors, authors.length - 1);
             int newAuthorsIndex = 0;

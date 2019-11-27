@@ -9,22 +9,14 @@ public class SimpleSchoolBookRepository implements BookRepository <SchoolBook> {
 
     @Override
     public boolean save(SchoolBook book) {
-        boolean isAddedBook = false;
-        if (book != null) {
-            SchoolBook [] newSchoolBooks = Arrays.copyOf(schoolBooks, schoolBooks.length + 1);
-            schoolBooks = newSchoolBooks;
-            schoolBooks[schoolBooks.length - 1] = book;
-            isAddedBook = true;
-        }
-        return isAddedBook;
+        SchoolBook [] newSchoolBooks = Arrays.copyOf(schoolBooks, schoolBooks.length + 1);
+        schoolBooks = newSchoolBooks;
+        schoolBooks[schoolBooks.length - 1] = book;
+        return true;
     }
 
     @Override
     public SchoolBook[] findByName(String name) {
-        if (name.isEmpty()) {
-            return new SchoolBook[0];
-        }
-
         int findBookCount = 0;
         for (SchoolBook book : schoolBooks) {
             if (book.getName().equals(name)) {
@@ -50,10 +42,6 @@ public class SimpleSchoolBookRepository implements BookRepository <SchoolBook> {
 
     @Override
     public boolean removeByName(String name) {
-        if (name.isEmpty()) {
-            return false;
-        }
-
         int findBookforDelete = 0;
         for (SchoolBook book : schoolBooks) {
             if (book.getName().equals(name)) {

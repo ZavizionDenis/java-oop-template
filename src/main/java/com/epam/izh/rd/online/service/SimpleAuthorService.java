@@ -15,16 +15,28 @@ public class SimpleAuthorService implements AuthorService {
 
     @Override
     public boolean save(Author author) {
+        if (author == null || author.getName().isEmpty() || author.getLastName().isEmpty()) {
+            return false;
+        }
+
         return authorRepository.save(author);
     }
 
     @Override
     public Author findByFullName(String name, String lastname) {
+        if (name.isEmpty() || lastname.isEmpty()) {
+            return null;
+        }
+
         return authorRepository.findByFullName(name, lastname);
     }
 
     @Override
     public boolean remove(Author author) {
+        if (author == null || author.getName().isEmpty() || author.getLastName().isEmpty()) {
+            return false;
+        }
+
         return authorRepository.remove(author);
     }
 
